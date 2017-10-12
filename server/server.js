@@ -11,7 +11,7 @@ var port = process.env.PORT || 8080;
 // @todo: This could be improved to serve development vs production builds.
 var root = path.join(__dirname, '../client/dist');
 app.get('/env', (req, res) => {
-  res.send(util.inspect({ env: process.env, req }));
+  res.send(util.inspect({ env: process.env, remote: req.connection.remoteAddress, req }));
 })
 app.use(express.static(root));
 app.use(fallback('index.html', {root: root}));
