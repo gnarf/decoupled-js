@@ -10,7 +10,9 @@ var port = process.env.PORT || 8080;
 // Serve build assets from the js client.
 // @todo: This could be improved to serve development vs production builds.
 var root = path.join(__dirname, '../client/dist');
-
+app.get('/env', (req, res) => {
+  res.send(JSON.stringify(process.env, true, '  '));
+})
 app.use(express.static(root));
 app.use(fallback('index.html', {root: root}));
 
